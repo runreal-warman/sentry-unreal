@@ -15,6 +15,14 @@ set ConfigPath=%ProjectPath:"=%\Config
 
 echo Sentry: Start debug symbols upload
 
+set "SENTRY_ENABLE_UPLOAD=%SENTRY_ENABLE_UPLOAD%"
+if /i "%SENTRY_ENABLE_UPLOAD%" NEQ "true" (
+    if /i "%SENTRY_ENABLE_UPLOAD%" NEQ "1" (
+        echo Sentry: Automatic symbols upload is disabled. Skipping...
+        exit /b
+    )
+)
+
 if "%TargetType%"=="Editor" (
     echo Sentry: Automatic symbols upload is not required for Editor target. Skipping...
     exit

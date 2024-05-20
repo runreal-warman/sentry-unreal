@@ -13,6 +13,11 @@ CONFIG_PATH=$projectPath/Config
 
 echo "Sentry: Start debug symbols upload"
 
+if [[ ! "$SENTRY_ENABLE_UPLOAD" =~ ^([Tt]rue|1)$ ]]; then
+    echo "Sentry: Automatic symbols upload is disabled. Skipping..."
+    exit
+fi
+
 if [ $targetType = "Editor" ]; then
     echo "Sentry: Automatic symbols upload is not required for Editor target. Skipping..."
     exit
